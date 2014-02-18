@@ -107,16 +107,7 @@ val ord_datetime = mkOrd { Lt = fn a b => toTime a < toTime b,
 
 fun format fmt dt : string = timef fmt (toTime dt)
 
-fun dayOfWeek dt : day_of_week =
-    case datetimeDayOfWeek (toTime dt) of
-        0 => Sunday
-      | 1 => Monday
-      | 2 => Tuesday
-      | 3 => Wednesday
-      | 4 => Thursday
-      | 5 => Friday
-      | 6 => Saturday
-      | n => error <xml>Illegal day of week {[n]}</xml>
+fun dayOfWeek dt : day_of_week = intToDayOfWeek (datetimeDayOfWeek (toTime dt))
 
 val now : transaction t =
     n <- now;
